@@ -1,0 +1,6 @@
+matplotlib==1.4.0
+seaborn=0.4.0
+scikit-image==0.10.1
+nitime==0.5
+git+https://www.github.com/neurita/boyle.git
+
