@@ -8,27 +8,27 @@
 #2013, Alexandre Manhaes Savio
 #Use this at your own risk!
 #-------------------------------------------------------------------------------
-import os
+import  os
 
-import numpy as np
-import skimage.io as skio
+import  numpy       as np
+import  skimage.io  as skio
 
-import matplotlib.pyplot as plt
-from matplotlib import colors
-import matplotlib.cm as cm
-from matplotlib.widgets import Slider
-import matplotlib.ticker as ticker
+import  matplotlib.pyplot   as plt
+from    matplotlib          import colors
+import  matplotlib.cm       as cm
+from    matplotlib.widgets  import Slider
+import  matplotlib.ticker   as ticker
 
-from mpl_toolkits.axes_grid import make_axes_locatable
-from mpl_toolkits.axes_grid1 import ImageGrid
+from    mpl_toolkits.axes_grid  import make_axes_locatable
+from    mpl_toolkits.axes_grid1 import ImageGrid
 
-from nipy.labs.viz_tools.edge_detect import _edge_detect
-from nitime.viz import drawmatrix_channels
+from    nipy.labs.viz_tools.edge_detect import _edge_detect
+from    nitime.viz          import drawmatrix_channels
 
-from boyle.nifti.read import get_nii_data
-from boyle.files.names import get_temp_file, remove_ext
+from    boyle.nifti.read    import get_nii_data
+from    boyle.files.names   import get_temp_file, remove_ext
 
-from .math import makespread
+from    ..utils.math        import makespread
 
 #-------------------------------------------------------------------------------------
 # Matplotlib-based options

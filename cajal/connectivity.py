@@ -1,13 +1,13 @@
 #brain on drops
 
-import os
-import numpy as np
-import nibabel as nib
-from collections import OrderedDict
+import  os
+import  numpy       as      np
+import  nibabel     as      nib
+from    collections import  OrderedDict
+from    mayavi      import  mlab
 
-from mayavi import mlab
+from    boyle.nifti.roi import get_rois_centers_of_mass
 
-from boyle.nifti.roi import get_rois_centers_of_mass
 
 def test_quiver3d():
     x, y, z = np.mgrid[-2:3, -2:3, -2:3]

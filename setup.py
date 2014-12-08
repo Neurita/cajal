@@ -14,17 +14,9 @@ from __future__ import print_function
 import os.path as op
 import io
 import sys
-from setuptools import Command, setup, find_packages
+from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
-from pip.req import parse_requirements
 from install_deps import get_requirements
-
-script_path = 'scripts'
-
-#install_reqs = parse_requirements('requirements.txt')
-req_files = ['requirements.txt', 'pip_requirements.txt']
-
-LICENSE = 'new BSD'
 
 
 #long description
@@ -38,9 +30,23 @@ def read(*filenames, **kwargs):
     return sep.join(buf)
 
 
+# Get version without importing, which avoids dependency issues
+module_name = find_packages(exclude=['tests'])[0]
+version_pyfile = op.join(module_name, 'version.py')
+exec(compile(read(version_pyfile), version_pyfile, 'exec'))
+
+
+script_path = 'scripts'
+
+#install_reqs = parse_requirements('requirements.txt')
+req_files = ['requirements.txt', 'pip_requirements.txt']
+
+LICENSE = 'new BSD'
+
+
 setup_dict = dict(
-    name='cajal',
-    version='0.1.0',
+    name=module_name,
+    version=__version__,
     description='Visualization tools for Brain MRI',
 
     license='BSD 3-Clause',
@@ -63,7 +69,7 @@ setup_dict = dict(
 
     platforms='Linux/MacOSX',
 
-    #https://pypi.python.org/pypi?%3Aaction=list_classifiers
+    # https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Programming Language :: Python',
         'Development Status :: 3 - Alpha',
@@ -85,12 +91,12 @@ setup_dict = dict(
     ],
 
     extras_require={
-        'testing': ['pytest'],
+        'testing': ['pytest', 'pytest-cov'],
     }
 )
 
 
-#Python3 support keywords
+# Python3 support keywords
 if sys.version_info >= (3,):
     setup_dict['use_2to3'] = False
     setup_dict['convert_2to3_doctests'] = ['']
@@ -98,6 +104,11 @@ if sys.version_info >= (3,):
 
 
 class PyTest(TestCommand):
+    user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        self.pytest_args = []
 
     def finalize_options(self):
         TestCommand.finalize_options(self)
@@ -105,9 +116,10 @@ class PyTest(TestCommand):
         self.test_suite = True
 
     def run_tests(self):
+        # import here, cause outside the eggs aren't loaded
         import pytest
-        errcode = pytest.main(self.test_args)
-        sys.exit(errcode)
+        errno = pytest.main(self.pytest_args)
+        sys.exit(errno)
 
 
 setup_dict.update(dict(tests_require=['pytest'],

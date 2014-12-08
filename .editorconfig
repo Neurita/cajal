@@ -2,6 +2,11 @@
 
 root = true
 
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
 [*.py]
 indent_style = space
 indent_size = 4
@@ -13,6 +18,11 @@ end_of_line = lf
 [*.bat]
 indent_style = tab
 end_of_line = crlf
+
+# Matches the exact files either package.json or .travis.yml
+[{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2
 
 [LICENSE]
 insert_final_newline = false

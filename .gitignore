@@ -50,5 +50,9 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+#PyCharm stuff
+.idea
+
 # PyBuilder
 target/
+

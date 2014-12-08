@@ -1,18 +1,19 @@
 __author__ = 'alexandre'
 
-import os
-import logging
-import subprocess
+import  os
+import  os.path as op
+import  logging
+import  subprocess
 
-from boyle.nifti.storage import save_niigz
-from boyle.files.names import get_temp_file, get_temp_dir
+from    boyle.nifti.storage import save_niigz
+from    boyle.files.names import get_temp_file, get_temp_dir
 
 log = logging.getLogger(__name__)
 
 
 class FslViewCaller(object):
 
-    fslview_bin = os.path.join(os.environ['FSLDIR'], 'bin', 'fslview')
+    fslview_bin = op.join(os.environ['FSLDIR'], 'bin', 'fslview')
 
     def __init__(self):
         self._tmpdir = get_temp_dir('fslviewcaller_')
@@ -20,7 +21,7 @@ class FslViewCaller(object):
         self._tmp_volume_files = set()
 
     def add_volume_from_path(self, nii_path):
-        if not os.path.exists(nii_path):
+        if not op.exists(nii_path):
             log.error('File {} not found.'.format(nii_path))
 
         self._add_volume_from_path(nii_path, is_tmp_file=False)

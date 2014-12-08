@@ -9,15 +9,14 @@
 #Use this at your own risk!
 #-------------------------------------------------------------------------------
 
+import  logging
+import  numpy           as np
+import  nibabel         as nib
+import  scipy.ndimage   as scn
+from    scipy.ndimage.measurements  import center_of_mass
+from    collections                 import OrderedDict
 
-import numpy as np
-import nibabel as nib
-import logging
-import scipy.ndimage as scn
-from scipy.ndimage.measurements import center_of_mass
-from collections import OrderedDict
-
-from boyle.strings import search_list
+from    boyle.strings import search_list
 
 log = logging.getLogger(__name__)
 
