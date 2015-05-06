@@ -61,10 +61,6 @@ setup_dict = dict(
 
     extra_files=['CHANGES.rst', 'LICENSE', 'README.rst'],
 
-    scripts=[op.join(script_path, 'convert.py'),
-             op.join(script_path, 'filetree.py'),
-             op.join(script_path, 'compare_id_sets.py'),],
-
     long_description=read('README.rst', 'CHANGES.rst'),
 
     platforms='Linux/MacOSX',
