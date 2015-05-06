@@ -4,7 +4,8 @@ import os.path as op
 import yaml
 import logging.config
 
-from .text_files import read
+from boyle.utils.text_files import read
+
 from ..config import LOG_LEVEL
 
 MODULE_NAME = __name__.split('.')[0]
